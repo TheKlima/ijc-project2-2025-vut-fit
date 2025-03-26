@@ -6,11 +6,9 @@
 // Date: 26.3.2025
 // Compiled: gcc version 11.4.0
 
-#include <assert.h>
-
 #include "htab.h"
 #include "htab_private.h"
-#include <stdlib.h>
+#include <assert.h>
 
 size_t htab_size(const htab_t* t)
 {
