@@ -6,8 +6,6 @@
 // Date: 26.3.2025
 // Compiled: gcc version 11.4.0
 
-#include <assert.h>
-
 #include "htab.h"
 #include "htab_private.h"
 #include <stdlib.h>
