@@ -28,25 +28,17 @@ typedef struct circular_buffer {
     int size;  // maximal number of the elements in the circular buffer
     int front; // first (front) element to exit the circular buffer
     int rear;  // last (rear) element to exit the circular buffer (the last one to arrive at the buffer)
-    char (*arr)[LINE_BUFFER_SIZE]; // array holding lines from the file (array of strings with size 4097)
+    char arr[][LINE_BUFFER_SIZE]; // array holding lines from the file (array of strings with size 4097)
 } Circular_buffer_t;
 
 // creates a circular buffer
 Circular_buffer_t* cbuf_create(int size)
 {
-    Circular_buffer_t* cb = (Circular_buffer_t *) malloc(sizeof(Circular_buffer_t));
+    Circular_buffer_t* cb = (Circular_buffer_t *) malloc(sizeof(Circular_buffer_t) + size * LINE_BUFFER_SIZE);
 
     if(!cb)
     {
         fprintf(stderr, "Error! malloc() has failed while allocating memory for circular buffer.\n");
-        return NULL;
-    }
-
-    cb->arr = (char (*)[LINE_BUFFER_SIZE]) malloc(size * LINE_BUFFER_SIZE);
-
-    if(!cb->arr)
-    {
-        fprintf(stderr, "Error! malloc() has failed while allocating memory for array of last lines.\n");
         return NULL;
     }
 
@@ -60,11 +52,6 @@ Circular_buffer_t* cbuf_create(int size)
 // frees memory initialized for circular buffer
 void cbuf_free(Circular_buffer_t* cb)
 {
-    if(cb)
-    {
-        free(cb->arr);
-    }
-
     free(cb);
 }
 
@@ -263,10 +250,8 @@ int main(int argc, char** argv)
 
     Circular_buffer_t* cb = cbuf_create(c.line_number);
 
-    if(cb == NULL) // if some malloc failed
+    if(cb == NULL) // if malloc has failed
     {
-        cbuf_free(cb);
-
         if(c.filename) // if file name was specified in the config (i.e. it is not a default stdin)
         {
             fclose(stream);
