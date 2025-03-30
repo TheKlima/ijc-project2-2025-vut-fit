@@ -2,6 +2,10 @@ CMakeLists.txt
 cmake-build-debug
 .idea
 tail
+maxwordcount-cpp
+maxwordcount
+maxwordcount-dynamic
+test/test
 
 # Prerequisites
 *.d
