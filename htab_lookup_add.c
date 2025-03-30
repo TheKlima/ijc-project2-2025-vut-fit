@@ -48,7 +48,7 @@ htab_pair_t* htab_lookup_add(htab_t* t, htab_key_t key)
         return NULL;
     }
 
-    strcpy(new_item->data->key, key);
+    strcpy((void*) new_item->data->key, key);
     new_item->data->value = 1;
 
     size_t htab_idx = htab_hash_function(key) % t->arr_size;

@@ -15,14 +15,14 @@ void htab_clear(htab_t* t)
 {
     assert(t && t->items);
 
-    for(int i = 0; i < t->arr_size; ++i)
+    for(size_t i = 0; i < t->arr_size; ++i)
     {
         for(const htab_item_t* current_item = t->items[i], *tmp; current_item != NULL; current_item = tmp)
         {
             tmp = current_item->next;
-            free(current_item->data->key);
+            free((void*) current_item->data->key);
             free(current_item->data);
-            free(current_item);
+            free((void*) current_item);
         }
 
         t->items[i] = NULL;

@@ -34,7 +34,7 @@ bool htab_erase(htab_t* t, htab_key_t key)
                 t->items[htab_idx] = current_item->next;
             }
 
-            free(current_item->data->key);
+            free((void*) current_item->data->key);
             free(current_item->data);
             free(current_item);
 

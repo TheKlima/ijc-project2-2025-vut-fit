@@ -15,7 +15,7 @@ void htab_for_each(const htab_t* t, void (*f)(htab_pair_t* data))
 {
     assert(t && t->items && f);
 
-    for(int i = 0; i < t->arr_size; ++i)
+    for(size_t i = 0; i < t->arr_size; ++i)
     {
         for(const htab_item_t* current_item = t->items[i]; current_item != NULL; current_item = current_item->next)
         {
