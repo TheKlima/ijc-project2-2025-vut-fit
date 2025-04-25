@@ -24,26 +24,24 @@ int read_word(unsigned max, char s[max], FILE* f)
 
     unsigned word_length = 0;
 
-    do
+    // Read characters until the word ends or max - 1 characters are stored
+    while(c != EOF && !isspace(c))
     {
-        s[word_length++] = c;
-    } while(word_length < max - 1 && !isspace(c = getc(f)) && c != EOF);
-
-    s[word_length] = '\0';
-
-    if(word_length == max - 1)
-    {
-        if(!is_warning_printed)
+        if(word_length < max - 1)
         {
-            fprintf(stderr, "Warning! Too long word.\n");
-            is_warning_printed = true;
+            s[word_length++] = (char)c;
         }
-
-        while(!isspace(c = getc(f)) && c != EOF)
+        else
         {
-            ++word_length;
+            if(!is_warning_printed)
+            {
+                fprintf(stderr, "Warning! Too long word.\n");
+                is_warning_printed = true;
+            }
         }
+        c = getc(f);
     }
 
+    s[word_length] = '\0'; // always safe
     return word_length;
 }
