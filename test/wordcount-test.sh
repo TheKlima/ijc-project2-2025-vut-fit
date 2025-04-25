@@ -22,7 +22,7 @@ test_script_output(){
     printf "${LIGHT_GRAY}[Test $test_cnt] – $test_description\n" # Print information about the current test
 
     # Run the script
-    ./maxwordcount-dynamic <"$test_file" | sort -n > "tmp_file.out"
+    ../maxwordcount-dynamic <"$test_file" | sort -n > "tmp_file.out"
 
     # Check the output
     output=$(cat ./tmp_file.out)
@@ -52,7 +52,7 @@ done
 
 # Check for memory leaks
 printf "${LIGHT_GRAY}[Test $test_cnt] – Testing memory leaks 1\n" # Print information about the current test
-valgrind_result=$(valgrind --leak-check=full ./maxwordcount-dynamic < ./wordcount_tests2024/empty.input 2>&1)
+valgrind_result=$(valgrind --leak-check=full ../maxwordcount-dynamic < ./wordcount_tests2024/empty.input 2>&1)
 
 if echo "$valgrind_result" | grep -q "All heap blocks were freed -- no leaks are possible"; then
     echo -e "${GREEN}Test passed ✓ ${DEFAULT}\n"
@@ -67,7 +67,7 @@ test_cnt=$(($test_cnt + 1))
 
 # Check for memory leaks
 printf "${LIGHT_GRAY}[Test $test_cnt] – Testing memory leaks 2\n" # Print information about the current test
-valgrind_result=$(valgrind --leak-check=full ./maxwordcount-dynamic < ./wordcount_tests2024/random_2.input 2>&1)
+valgrind_result=$(valgrind --leak-check=full ../maxwordcount-dynamic < ./wordcount_tests2024/random_2.input 2>&1)
 
 if echo "$valgrind_result" | grep -q "All heap blocks were freed -- no leaks are possible"; then
     echo -e "${GREEN}Test passed ✓ ${DEFAULT}\n"
@@ -81,7 +81,7 @@ fi
 test_cnt=$(($test_cnt + 1))
 
 printf "${LIGHT_GRAY}[Test $test_cnt] – Testing memory leaks 3\n" # Print information about the current test
-valgrind_result=$(valgrind --leak-check=full ./maxwordcount-dynamic < ./wordcount_tests2024/seq.input 2>&1)
+valgrind_result=$(valgrind --leak-check=full ../maxwordcount-dynamic < ./wordcount_tests2024/seq.input 2>&1)
 
 if echo "$valgrind_result" | grep -q "All heap blocks were freed -- no leaks are possible"; then
     echo -e "${GREEN}Test passed ✓ ${DEFAULT}\n"

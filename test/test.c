@@ -16,7 +16,7 @@ void test_lookup_add() {
     new->value = 42;
     htab_pair_t *exist = htab_lookup_add(htab, "kentus");
     assert(strcmp(exist->key, "kentus") == 0);
-    assert(exist->value == 43);
+    assert(exist->value == 42);
 
     htab_free(htab);
 }

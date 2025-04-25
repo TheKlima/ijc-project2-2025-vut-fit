@@ -128,7 +128,7 @@ assert_wc() {
 
     wc_cc="$(echo "$stdin" | "../maxwordcount-cpp" | sort)"
     testing_wc="$(echo "$stdin" | "../maxwordcount" | sort)"
-    testing_wc_dyn="$(echo "$stdin" | LD_LIBRARY_PATH="." "./maxwordcount-dynamic" | sort)"
+    testing_wc_dyn="$(echo "$stdin" | LD_LIBRARY_PATH="." "../maxwordcount-dynamic" | sort)"
 
     [ "$testing_wc_dyn" = "$testing_wc" ] || echo \
 "TESTING FAIL: Dynamic version differs:
@@ -146,7 +146,7 @@ assert_wc_noeq() {
 
     wc_cc="$(echo "$stdin" | "../maxwordcount-cpp" | sort)"
     testing_wc="$(echo "$stdin" | "../maxwordcount" | sort)"
-    testing_wc_dyn="$(echo "$stdin" | LD_LIBRARY_PATH="." "./maxwordcount-dynamic" | sort)"
+    testing_wc_dyn="$(echo "$stdin" | LD_LIBRARY_PATH="." "../maxwordcount-dynamic" | sort)"
 
     [ "$testing_wc_dyn" = "$testing_wc" ] || echo \
 "TESTING FAIL: Dynamic version differs:
