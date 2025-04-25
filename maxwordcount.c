@@ -12,14 +12,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HTAB_SIZE 13001
+#define HTAB_SIZE 13001 // a prime number for 10 000 words
 #define MAX_WORD_LENGTH 255
 #define WORD_BUFFER_SIZE (MAX_WORD_LENGTH + 1)
-
-// void printHtabItemData(htab_pair_t* data)
-// {
-//     printf("%s\t%u\n", data->key, data->value);
-// }
 
 int main()
 {
@@ -35,15 +30,16 @@ int main()
 
     while(read_word(WORD_BUFFER_SIZE, current_word, stdin) != EOF)
     {
-        if(!htab_lookup_add(htab, current_word))
+        htab_pair_t* pair = htab_lookup_add(htab, current_word);
+        if(!pair)
         {
             fprintf(stderr, "Error! Couldn't add a new item to the hash table.\n");
             htab_free(htab);
             return EXIT_FAILURE;
         }
-    }
 
-    // htab_for_each(htab, printHtabItemData);
+        ++pair->value;
+    }
 
     unsigned max = 0;
     for(unsigned i = 0; i < htab->arr_size; ++i)
