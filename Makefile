@@ -21,7 +21,7 @@ maxwordcount-dynamic: maxwordcount.o io.o $(SHARED_LIB)
 	$(CC) $(CFLAGS) maxwordcount.o io.o -o $@ -L. -lhtab -Wl,-rpath,.
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -fPIC -c $< -o $@
 
 $(STATIC_LIB): $(LIB_FILES)
 	ar crs $@ $^
